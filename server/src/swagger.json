@@ -1,0 +1,1460 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.8",
+        "title": "REST API proyecto Indapura",
+        "description": "<strong> Emmanuel Robles",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "proyectoindapura.azurewebsites.net",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Cliente",
+            "description": "API para obtener informacion de los clientes de Indapura"
+        },
+        { "name": "Chofer",
+            "description": "API para obtener informacion de los choferes de Indapura"
+        },
+        {
+            "name": "Producto",
+            "description": "API para obtener informacion de los productos de Indapura"
+        },
+        {
+            "name" : "Encargado",
+            "description" :"API para obtener informacion de los encargados para el uso del sistema de Indapura"
+        },
+        {
+            "name" : "Pedido",
+            "description" :"API para obtener informacion de los pedidos para el uso del sistema de Indapura"
+        },
+        {
+            "name" : "Tipo",
+            "description" :"API para obtener informacion de los tipos de producto para el uso del sistema de Indapura"
+        }
+
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/cliente": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Listado de todos los clientes registrados.",
+                "description": "API para obtener informacion de los choferes de Indapura",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Emmanuel Robles",
+                                    "telefono": "9511211991",
+                                    "email": "emmanuelreg26@gmail.com",
+                                    "direccion": "1era Priv Francisco I Madero #3"
+                                },
+                                {
+                                    "id": 3,
+                                    "nombre": "Juan Rodriguez",
+                                    "telefono": "9511211992",
+                                    "email": "juanrodriguez@gmail.com",
+                                    "direccion": "8810 Erdman Courts, Suite 741, 69404-7262, Yosttown, South Dakota, United States"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Clientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/cliente/{id}": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Muestra la información de un cliente, dado su id.",
+                "description": "<p>Servicio que devuelve la información detallada de un cliente dado su id </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los clientes?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Emmanuel Robles",
+                                    "telefono": "9511211991",
+                                    "email": "emmanuelreg26@gmail.com",
+                                    "direccion": "1era Priv Francisco I Madero #3"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Clientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "required id del cliente",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/cliente/": {
+            "post": {
+                "summary": "Agregar un cliente al registro .",
+                "description": "<p>Servicio que ingresa un usuario mas al  sistema de indapura </p><p>&nbsp;</p><p><em><strong>¿Cual cliente se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "body",
+                        "description": "Ingrese los datos del cliente",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoCliente"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Cliente"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 7,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Clientes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/cliente/update/{idCliente}": {
+            "put": {
+                "summary": "Modificar los datos de un producto",
+                "description": "<p>Servicio que modifica la información de un cliente </p><p>&nbsp;</p><p><em><strong>¿Cuál es el cliente?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idCliente",
+                        "in": "path",
+                        "description": "Ingrese el id del cliente",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Cliente",
+                        "in": "body",
+                        "description": "Ingrese la info del producto",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoCliente"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Cliente"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/cliente/delete/{idCliente}": {
+            "delete": {
+                "summary": "Modificar los datos de un cliente",
+                "description": "<p>Servicio que elimina la información de un cliente </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese cliente?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idCliente",
+                        "in": "path",
+                        "description": "Ingrese el id del cliente",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Cliente"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/chofer": {
+            "get": {
+                "tags": [
+                    "Chofer"
+                ],
+                "summary": "Listado de todos los choferes registrados.",
+                "description": "API para obtener informacion de los choferes de Indapura",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Emmanuel Robles",
+                                    "telefono": "9511211991",
+                                    "email": "emmanuelreg26@gmail.com",
+                                    "direccion": "1era Priv Francisco I Madero #3"
+                                },
+                                {
+                                    "id": 3,
+                                    "nombre": "Juan Rodriguez",
+                                    "telefono": "9511211992",
+                                    "email": "juanrodriguez@gmail.com",
+                                    "direccion": "8810 Erdman Courts, Suite 741, 69404-7262, Yosttown, South Dakota, United States"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Choferes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/chofer/{id}": {
+            "get": {
+                "tags": [
+                    "Chofer"
+                ],
+                "summary": "Muestra la información de un chofer, dado su id.",
+                "description": "<p>Servicio que devuelve la información detallada de un cliente dado su id </p><p>&nbsp;</p><p><em><strong>¿Cuáles son los clientes?</strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Chofer"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "require id del chofer",
+                        "type": "string",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/chofer/nombre": {
+            "get": {
+                "tags": [
+                    "Chofer"
+                ],
+                "summary": "Muestra el  nombre de los choferes que se encuentran disponibles.",
+                "description": "<p>Servicio que devuelve la información de los nombres de los choferes.</p><p>&nbsp;</p><p><em><strong></strong></em></p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Sebastián González"
+                                },
+                                {
+                                    "id": 3,
+                                    "nombre": "Roberto López"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Choferes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/chofer/": {
+            "post": {
+                "summary": "Agregar un chofer al sistema de indapura.",
+                "description": "<p>Servicio que ingresa un chofer al  sistema </p><p>&nbsp;</p><p><em><strong>¿Cual usuario se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Chofer",
+                        "in": "body",
+                        "description": "Ingrese los datos del chofer",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoChofer"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Chofer"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Chofer creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 8,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Choferes"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/chofer/update/{idChofer}": {
+            "put": {
+                "summary": "Modificar los datos de un chofer",
+                "description": "<p>Servicio que modifica la información de un chofer  </p><p>&nbsp;</p><p><em><strong>¿Cuál es el chofer?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idChofer",
+                        "in": "path",
+                        "description": "Ingrese el id del chofer",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Chofer",
+                        "in": "body",
+                        "description": "Ingrese la info del chofer",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoChofer"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Chofer"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/chofer/update/disponible/{idChofer}": {
+            "put": {
+                "summary": "Actualiza la disponibilidad de un chofer",
+                "tags": [ "Chofer"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta exitosa"
+                    }
+                }
+            }
+        },
+        "/api/chofer/delete/{idChofer}": {
+            "delete": {
+                "summary": "Eliminar un chofer de la base de datos",
+                "description": "<p>Servicio que elimina la información de un chofer </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese chofer?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idChofer",
+                        "in": "path",
+                        "description": "Ingrese el id del chofer",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Chofer"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/producto/": {
+            "post": {
+                "summary": "Agregar un producto al registro de Indapura.",
+                "description": "<p>Servicio que ingresa un producto mas al  sistema de Indapura </p><p>&nbsp;</p><p><em><strong>¿Cual producto se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Producto",
+                        "in": "body",
+                        "description": "Ingrese los datos del producto",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoProducto"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Producto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto creado",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "fieldCount": 0,
+                                    "affectedRows": 1,
+                                    "insertId": 9,
+                                    "serverStatus": 2,
+                                    "warningCount": 0,
+                                    "message": "",
+                                    "protocol41": true,
+                                    "changedRows": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/producto": {
+            "get": {
+                "summary": "Muestra los productos registrados en el sistema Indapura.",
+                "description": "<p>Servicio que muestra todos  los productos del  sistema</p><p>&nbsp;</p><p><em><strong></strong></em></p>",
+                "tags": [
+                    "Producto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de productos",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 23,
+                                    "caducidad": "15/12/2022",
+                                    "fecha_produccion": "11/12/2022",
+                                    "cantidad_producida": 15,
+                                    "productoTipo": 3
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Productos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/producto/detail": {
+            "get": {
+                "tags": [
+                    "Producto"
+                ],
+                "summary": "Obtiene la lista de productos con detalle de tipo",
+                "operationId": "listDetail",
+                "responses": {
+                    "200": {
+                        "description": "Lista de productos con detalle de tipo",
+                        "examples": {
+                            "application/json" : [
+                                {
+                                    "id": 6,
+                                    "caducidad": "15/12/2022",
+                                    "fecha_produccion": "11/12/2022",
+                                    "cantidad_producida": 9,
+                                    "productoTipo": 1,
+                                    "nombre": "Botella 1 l",
+                                    "descripcion": "producto que contiene 1 l de agua purificada",
+                                    "precio": 15,
+                                    "numero_producto": 3
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProductoDetalle"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/producto/agrupar": {
+            "get": {
+                "summary": "Muestra los productos registrados en el sistema Indapura agrupados por tipo y la cantidad en existencia.",
+                "description": "<p>Servicio que muestra todos  los productos del  sistema agrupados</p><p>&nbsp;</p><p><em><strong></strong></em></p>",
+                "tags": [
+                    "Producto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de productos",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "productoTipo": 1,
+                                    "existencia": 19
+                                },
+                                {
+                                    "productoTipo": 2,
+                                    "existencia": 8
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Productos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/producto/delete/{idProducto}": {
+            "delete": {
+                "summary": "Eliminar un producto de la base de datos",
+                "description": "<p>Servicio que elimina la información de un producto </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese producto?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idProducto",
+                        "in": "path",
+                        "description": "Ingrese el id del producto",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Producto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/producto/update/{idProducto}": {
+            "put": {
+                "summary": "Modificar los datos de un producto",
+                "description": "<p>Servicio que modifica /api/encargado/{idEncargado}la información de un producto que pertenece al sistema </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese producto?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idProducto",
+                        "in": "path",
+                        "description": "Ingrese el id del producto",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Producto",
+                        "in": "body",
+                        "description": "Ingrese la info del producto",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/viejoProducto"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Producto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/encargado": {
+            "get": {
+                "summary": "Muestra los productos registrados en el sistema Indapura.",
+                "description": "<p>Servicio que muestra todos  los productos del  sistema</p><p>&nbsp;</p><p><em><strong></strong></em></p>",
+                "tags": [
+                    "Encargado"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de encargados del sistema",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 2,
+                                    "nombre": "Petra Rodriguez",
+                                    "telefono": "9512222322",
+                                    "email": "PetraRod@gmail.com",
+                                    "puesto": "secretaria",
+                                    "password": "prueba262",
+                                    "acceso": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "nombre": "Holly Stevenson",
+                                    "telefono": "3566470669",
+                                    "email": "holly_stevenson@gmail.com",
+                                    "puesto": "secretaria",
+                                    "password": "638ed51f9fd4e68d9803fbe1",
+                                    "acceso": 0
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Encargados"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/encargado/": {
+            "post": {
+                "summary": "Agregar un encargado al registro de Indapura.",
+                "description": "<p>Servicio que ingresa un encargado mas al  sistema de Indapura </p><p>&nbsp;</p><p><em><strong>¿Cual producto se agrega?</strong></em></p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Encargado",
+                        "in": "body",
+                        "description": "Ingrese los datos del encargado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Encargado"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Encargado"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Encargado creado",
+                        "examples": {
+                            "application/json": [
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Encargado"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/encargado/checkUser": {
+            "post": {
+                "tags": [
+                    "Encargado"
+                ],
+                "summary": "Verifica si el usuario de encargado existe en la base de datos",
+                "description": "Realiza una consulta a la base de datos para verificar si el usuario de encargado existe y devuelve su nombre y nivel de acceso si se encuentra",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Encargado"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario de encargado encontrado",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario de encargado no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/encargado/update/{idEncargado}": {
+            "put": {
+                "summary": "Modificar los datos de un encargado",
+                "description": "<p>Servicio que modifica la información de un encargado que pertenece al sistema </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese producto?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tipo",
+                        "in": "body",
+                        "description": "Información del tipo a crear",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Encargado"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Encargado"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/encargado/delete/{idEncargado}": {
+            "delete": {
+                "summary": "Eliminar un encargado de la base de datos",
+                "description": "<p>Servicio que elimina la información de un encargado </p><p>&nbsp;</p><p><em><strong>¿Cuál es ese encargado?</strong></em></p>",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "idEncargado",
+                        "in": "path",
+                        "description": "Ingrese el id del encargado",
+                        "required": true,
+                        "default": 1,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Encargado"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "servicio OK"
+                    }
+                }
+            }
+        },
+        "/api/tipo": {
+            "get": {
+                "summary": "Obtiene la lista de tipos",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos",
+                        "examples": {
+                            "application/json" : [
+                                {
+                                    "id": 4,
+                                    "nombre": "Garrafon",
+                                    "descripcion": "producto que contiene 20 l de agua purificada",
+                                    "precio": 28,
+                                    "numero_producto": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "nombre": "Botella 500ml",
+                                    "descripcion": "producto que contiene 500 ml de agua purificada",
+                                    "precio": 10,
+                                    "numero_producto": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Tipo"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Tipo"
+                ]
+            },
+            "post": {
+                "summary": "Crea un nuevo tipo",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "tipo",
+                        "in": "body",
+                        "description": "Información del tipo a crear",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Tipo"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Tipo"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Tipo creado"
+                    }
+                }
+            }
+        },
+        "/api/tipo/delete/{id}": {
+            "delete": {
+                "summary": "Elimina un tipo",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del tipo a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Tipo"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tipo eliminado"
+                    }
+                }
+            }
+        },
+        "/api/tipo/update/{id}": {
+            "put": {
+                "summary": "Actualiza un tipo",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del tipo a actualizar",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tipo",
+                        "in": "body",
+                        "description": "Información del tipo a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Tipo"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Tipo"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tipo actualizado"
+                    }
+                }
+            }
+        },
+        "/api/pedido/": {
+            "get": {
+                "tags": [
+                    "Pedido"
+                ],
+                "summary": "Listado de pedidos",
+                "description": "Retorna un listado de todos los pedidos registrados en la base de datos",
+                "responses": {
+                    "200": {
+                        "description": "Listado de pedidos",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 31,
+                                    "cantidad": 1,
+                                    "id_cliente": 5,
+                                    "id_producto": 19,
+                                    "id_chofer": 2
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Pedido"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pedido"
+                ],
+                "summary": "Creación de pedido",
+                "description": "Crea un nuevo pedido en la base de datos",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Información del pedido a crear",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Pedido"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Pedido creado exitosamente"
+                    }
+                }
+            }
+        },
+        "/pedido/delete/{id}": {
+            "delete": {
+                "summary": "Elimina un pedido específico",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID del pedido a eliminar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pedido eliminado con éxito"
+                    }
+                },
+                "tags": ["Pedido"]
+            }
+        },
+        "/api/pedido/update/{id}": {
+            "put": {
+                "summary": "Actualizar un pedido por ID",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del tipo a actualizar",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "tipo",
+                        "in": "body",
+                        "description": "Información del tipo a actualizar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Pedido"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Pedido"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tipo actualizado"
+                    }
+                }
+            }
+        },
+        "/api/pedido/{id}": {
+            "get": {
+                "tags": [
+                    "Pedido"
+                ],
+                "summary": "Da un pedido por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Pedido"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pedido not found"
+                    }
+                }
+            }
+        }
+    },
+
+
+    "definitions": {
+        "Tipo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "descripcion" : {
+                    "type": "string"
+                },
+                "precio" : {
+                    "type": "integer"
+                },
+                "numero_producto" : {
+                    "type": "integer"
+                }
+            }
+        },
+        "Pedido": {
+            "type": "object",
+            "properties": {
+                "cantidad": {
+                    "type": "integer"
+                },
+                "id_cliente": {
+                    "type": "integer"
+                },
+                "id_producto": {
+                    "type": "integer"
+                },
+                "id_chofer" : {
+                    "type": "integer"
+                },
+                "cantidad" : {
+                    "type": "integer"
+                }
+            }
+        },
+        "Clientes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Cliente"
+            }
+        },
+        "Cliente": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un cliente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del cliente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del cliente"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del cliente"
+                },
+                "direccion": {
+                    "type": "string",
+                    "description": "Almacena la direccion completa del cliente"
+                }
+            }
+        },
+        "NuevoCliente": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un cliente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del cliente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del cliente"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del cliente"
+                },
+                "direccion": {
+                    "type": "string",
+                    "description": "Almacena la direccion completa del cliente"
+                }
+            }
+        },
+        "Choferes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Chofer"
+            }
+        },
+        "Chofer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un chofer"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del chofer"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del chofer"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del chofer"
+                },
+                "licencia": {
+                    "type": "string",
+                    "description": "Almacena el codigo de la licencia de conducir del chofer"
+                },
+                "vehiculo": {
+                    "type": "string",
+                    "description": "Contiene el modelo del vehiculo que porta el chofer por parte de la empresa"
+                },
+                "disponible": {
+                    "type": "int",
+                    "description": "Contiene un 0 si el chofer se encuentra en un reparto o 1 si esta disponible"
+                }
+            }
+        },
+        "viejoChofer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un cliente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del cliente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del cliente"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del cliente"
+                },
+                "direccion": {
+                    "type": "string",
+                    "description": "Almacena la direccion completa del cliente"
+                }
+            }
+        },
+        "NuevoChofer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un cliente"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del cliente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del cliente"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del cliente"
+                },
+                "direccion": {
+                    "type": "string",
+                    "description": "Almacena la direccion completa del cliente"
+                }
+            }
+        },
+        "Productos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Producto"
+            }
+        },
+        "Producto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un Producto "
+                },
+                "producto_tipo": {
+                    "type": "integer",
+                    "description": "Hace referencia al tipo de producto que del que se hizo el pedido"
+                },
+                "Precio": {
+                    "type": "integer",
+                    "description": "Contiene el Precio Del Producto"
+                },
+                "Cantidad": {
+                    "type": "integer",
+                    "description": "Contiene La Cantidad De Producto En Existencia"
+                },
+                "Fecha_produccion": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Producción DeL Producto"
+                },
+                "Fecha_Caducidad ": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Caducidad Estimada DeL Producto"
+                }
+            }
+        },
+        "NuevoProducto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un Producto "
+                },
+                "producto_tipo": {
+                    "type": "integer",
+                    "description": "Hace referencia al tipo de producto que del que se hizo el pedido"
+                },
+                "Precio": {
+                    "type": "integer",
+                    "description": "Contiene el Precio Del Producto"
+                },
+                "Cantidad": {
+                    "type": "integer",
+                    "description": "Contiene La Cantidad De Producto En Existencia"
+                },
+                "Fecha_produccion": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Producción DeL Producto"
+                },
+                "Fecha_Caducidad ": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Caducidad Estimada DeL Producto"
+                }
+            }
+        },
+        "viejoProducto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un Producto "
+                },
+                "Tipo": {
+                    "type": "number",
+                    "description": "describe el tipo de producto al Que Se Refiere "
+                },
+                "Precio": {
+                    "type": "number",
+                    "description": "Contiene el Precio Del Producto"
+                },
+                "Cantidad": {
+                    "type": "number",
+                    "description": "Contiene La Cantidad De Producto En Existencia"
+                },
+                "Fecha_produccion": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Producción DeL Producto"
+                },
+                "Fecha_Caducidad ": {
+                    "type": "string",
+                    "description ": "Contiene la Fecha De Caducidad Estimada DeL Producto"
+                }
+            }
+        },
+        "Encargados" : {
+            "type" : "array",
+            "items" : {
+                "$ref" :"#/definitions/Encargado"
+            }
+        },
+        "Encargado" : {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único de un encargado"
+                },
+                "nombre": {
+                    "type": "string",
+                    "description": "describe el nombre del cliente"
+                },
+                "telefono": {
+                    "type": "string",
+                    "description": "Contiene el numero telefonico del encargado"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contiene el correo electronico del encargado"
+                },
+                "puesto": {
+                    "type": "string",
+                    "description": "Almacena el pueso que ocupa el encargado"
+                },
+                "acceso": {
+                    "type": "string",
+                    "description": "Almacena el tipo de acceso que tiene el encargado"
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,50 @@
+"info": {
+"title": "My API",
+"version": "1.0.0"
+},
+"paths": {
+"/{id}": {
+"get": {
+"summary": "Get a single pedido by ID",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"type": "integer"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"schema": {
+"type": "object",
+"properties": {
+"id": {
+"type": "integer"
+},
+"nombre": {
+"type": "string"
+},
+"apellidos": {
+"type": "string"
+},
+"dni": {
+"type": "string"
+},
+"telefono": {
+"type": "string"
+},
+"email": {
+"type": "string"
+}
+}
+}
+},
+"404": {
+"description": "Pedido not found"
+}
+}
+}
+}
+}
